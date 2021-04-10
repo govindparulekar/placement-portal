@@ -14,25 +14,32 @@ class Drive{
     public $drive_start_date;
     public $app_end_date;
 
+    // construct or with $db as database connection
+    public function __construct($conn){
+        $this->conn = $conn;
+    }   
+
     public function create(){
         $query = "INSERT INTO $this->table_name
-                    SET tpo_id = :tpoid,
+                    SET tpo_id = :tpo_id,
+                    drive_id = :drive_id,
                     company_name = :company_name,
                     description = :description,
                     package_fixed = :package_fixed,
                     package_range = :package_range,
-                    branch = :branch,
                     designation = :designation,
                     drive_start_date = :dst,
                     app_end_date = :aed";
 
         $stmt = $this->conn->prepare($query);
+
+        //total 10
         $stmt->bindParam(':tpo_id',$this->tpo_id);
+        $stmt->bindParam(':drive_id',$this->drive_id);
         $stmt->bindParam(':company_name',$this->company_name);
         $stmt->bindParam(':description',$this->description);
         $stmt->bindParam(':package_fixed',$this->package_fixed);
         $stmt->bindParam(':package_range',$this->package_range);
-        $stmt->bindParam(':branch',$this->branch);
         $stmt->bindParam(':designation',$this->designation);
         $stmt->bindParam(':dst',$this->drive_start_date);
         $stmt->bindParam(':aed',$this->app_end_date);
