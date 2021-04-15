@@ -37,7 +37,7 @@ for ($sheet_row=2; $sheet_row <= $highestRow ; $sheet_row++) {
     $student->email = $row_data[1];
     $student->roll_no = $row_data[2];   
     $student->division = $row_data[3];
-    $student->branch = $row_data[4];
+    $student->branch_id = $row_data[4];
     $student->username = explode(" ",$row_data[0])[0].$student->roll_no;
     $student->password = substr(md5($student->email),0,8);
     //$student->password = password_hash($student->pass_text,PASSWORD_DEFAULT);

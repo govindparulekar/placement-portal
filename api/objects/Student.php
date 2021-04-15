@@ -14,7 +14,7 @@ class Student{
     public $password;
     public $pass_text;
     public $division;
-    public $branch;
+    public $branch_id;
     public $roll_no;
     
 
@@ -24,7 +24,7 @@ class Student{
     }
 
     public function register(){
-        $query = "INSERT INTO $this->table_name SET tpo_id = :tpo_id, name = :name , email = :email, username = :username, password = :password, division = :division, branch = :branch, roll_no =:roll_no";
+        $query = "INSERT INTO $this->table_name SET tpo_id = :tpo_id, name = :name , email = :email, username = :username, password = :password, division = :division, branch_id = :branch_id, roll_no =:roll_no";
 
         $stmt = $this->conn->prepare($query);
         $this->tpo_id = htmlspecialchars(strip_tags($this->tpo_id));
@@ -33,7 +33,7 @@ class Student{
         $this->username = htmlspecialchars(strip_tags($this->username));
         $this->password = htmlspecialchars(strip_tags($this->password));
         $this->division = htmlspecialchars(strip_tags($this->division));
-        $this->branch = htmlspecialchars(strip_tags($this->branch));
+        $this->branch_id = htmlspecialchars(strip_tags($this->branch_id));
         $this->roll_no = htmlspecialchars(strip_tags($this->roll_no));
         
         $stmt->bindParam(":tpo_id",$this->tpo_id);
@@ -42,7 +42,7 @@ class Student{
         $stmt->bindParam(":username",$this->username);
         $stmt->bindParam(":password",$this->password);
         $stmt->bindParam(":division",$this->division);
-        $stmt->bindParam(":branch",$this->branch);
+        $stmt->bindParam(":branch_id",$this->branch_id);
         $stmt->bindParam(":roll_no",$this->roll_no);
 
         if($stmt->execute()){

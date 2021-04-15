@@ -1,23 +1,18 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    hello
+<?php
+header("Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+header("Content-Disposition: attachment ; filename = hello world.xlsx");
+require '../vendor/autoload.php';
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-    <script>
-        $.post('test.php',{
-            branch : ['b1','b2','b3']
-        },
-        (data)=>{
-            console.log(data);
-        }
-        );
-    </script>
-</body>
-</html>
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+
+$spreadsheet = new Spreadsheet();
+
+$worksheet = $spreadsheet->getActiveSheet();
+$worksheet->setCellValue('A1','Govind ajsdfjakjdadjf sldjkfs jfkjjljsf lajflajskdkjaskdjf ajsdfjsdfkjksjdfj dskjfskdfjdkjf');
+
+$writer = new Xlsx($spreadsheet);
+
+$writer->save('php://output');
+?>
+
