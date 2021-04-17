@@ -38,6 +38,20 @@ class AppliedStudent{
         }
      
     }
+
+    function remove($student_id_array){
+        $query = "DELETE FROM applied_student WHERE student_id = :student_id";
+        $stmt = $this->conn->prepare($query);
+
+        for ($i=0; $i < count($student_id_array) ; $i++) { 
+            # code...
+            $stmt->bindParam(':student_id',$student_id_array[$i]);
+            if(!$stmt->execute()){
+                return false;
+            }
+        }
+        return true;
+    }
     
 
 

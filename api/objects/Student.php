@@ -23,6 +23,21 @@ class Student{
         $this->conn = $conn;
     }
 
+    public function read(){
+        $query = "SELECT * FROM $this->table_name s
+                    JOIN student_acadamic_info as sa
+                    ON s.student_id = sa.student_id
+                    JOIN branch as b
+                    ON s.branch_id = b.branch_id
+                    WHERE s.student_id = $this->student_id";
+        if($stmt = $this->conn->query($query)){
+            return $stmt;
+        }
+        else{
+            return false;
+        }
+    }
+
     public function register(){
         $query = "INSERT INTO $this->table_name SET tpo_id = :tpo_id, name = :name , email = :email, username = :username, password = :password, division = :division, branch_id = :branch_id, roll_no =:roll_no";
 
