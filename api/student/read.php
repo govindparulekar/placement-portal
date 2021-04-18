@@ -3,7 +3,7 @@
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Max-Age: 86400");
 header("Content-Type: application/json; charset=UTF-8");
-header("Access-Control-Allow-Methods: GET");
+header("Access-Control-Allow-Methods: POST");
 header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
 
   
@@ -16,17 +16,49 @@ $db = new Database();
 $conn = $db->getConnection();
 $student = new Student($conn);
 
-$student_id = !empty($_GET['student_id']) ? sanitize($_GET['student_id']) : null;
+$student_id = !empty($_POST['student_id']) ? sanitize($_POST['student_id']) : null;
+$name = !empty($_POST['name']) ? sanitize($_POST['name']) : null;
+$roll_no = !empty($_POST['roll_no']) ? sanitize($_POST['roll_no']) : null;
+$branch_id = !empty($_POST['branch_id']) ? sanitize($_POST['branch_id']) : null;
+$tpo_id = !empty($_POST['tpo_id']) ? sanitize($_POST['tpo_id']) : null;
 
-if(!empty($student_id)){
+
+if (!empty($student_id)) {
     $student->student_id = $student_id;
-    if($stmt = $student->read()){
+    fetch('id');
+}
+else if(!empty($name)&&!empty($branch_id)&&!empty($tpo_id)){
+    $student->name = $name;
+    fetch('name');
+
+}
+else if(!empty($roll_no)&&!empty($branch_id)&&!empty($tpo_id)){
+    $student->roll_no = $roll_no;
+    fetch('roll');
+    
+}
+else if(!empty($branch_id)&&!empty($tpo_id)){
+    fetch('branch');
+    
+}
+else{
+    echo json_encode(array("status"=>"failed","msg"=>"Insufficient data"));
+}
+
+function fetch($filter){
+    global $student,$branch_id,$tpo_id;
+      
+    $student->branch_id = $branch_id;
+    $student->tpo_id = $tpo_id;
+
+    
+    if($stmt = $student->read($filter)){
         if ($stmt->rowCount()>0) {
             # code...
             $data = array("status"=>"succes","records"=> array());
-            $row = $stmt->fetch();
-            extract($row);
-            $tpo_data = array(
+            while($row = $stmt->fetch()){
+                extract($row);
+                $student_data = array(
                 "student_id"                => $student_id,
                 "name"                      => $name,
                 "email"                     => $email,
@@ -52,8 +84,9 @@ if(!empty($student_id)){
                 "dead_kt"                   => $dead_kt,
                 "division"                  => $division
             );
-            array_push($data['records'],$tpo_data);
+            array_push($data['records'],$student_data);
             echo "hello";
+            }         
             echo json_encode($data);
         }
         else{
@@ -65,7 +98,5 @@ if(!empty($student_id)){
         echo 'fail';
     }
 }
-else{
-    echo json_encode(array("status"=>"failed","msg"=>"Insufficient data"));
+    
 
-}

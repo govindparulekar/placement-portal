@@ -23,13 +23,44 @@ class Student{
         $this->conn = $conn;
     }
 
-    public function read(){
-        $query = "SELECT * FROM $this->table_name s
-                    JOIN student_acadamic_info as sa
-                    ON s.student_id = sa.student_id
-                    JOIN branch as b
-                    ON s.branch_id = b.branch_id
-                    WHERE s.student_id = $this->student_id";
+    public function read($filter){
+        switch ($filter) {
+            case 'id':
+                $query = "SELECT * FROM $this->table_name s
+                            JOIN student_acadamic_info as sa
+                            ON s.student_id = sa.student_id
+                            JOIN branch as b
+                            ON s.branch_id = b.branch_id
+                            WHERE s.student_id = $this->student_id";
+            break;
+            case 'name':
+                $query = "SELECT * FROM $this->table_name s
+                            JOIN student_acadamic_info as sa
+                            ON s.student_id = sa.student_id
+                            JOIN branch as b
+                            ON s.branch_id = b.branch_id
+                            WHERE s.name = '$this->name' AND s.branch_id = $this->branch_id AND s.tpo_id = $this->tpo_id";
+            break;
+            case 'roll':
+                $query = "SELECT * FROM $this->table_name s
+                            JOIN student_acadamic_info as sa
+                            ON s.student_id = sa.student_id
+                            JOIN branch as b
+                            ON s.branch_id = b.branch_id
+                            WHERE s.roll_no = $this->roll_no AND s.branch_id = $this->branch_id AND s.tpo_id = $this->tpo_id";
+            break;
+            
+            default:
+                $query = "SELECT * FROM $this->table_name s
+                            JOIN student_acadamic_info as sa
+                            ON s.student_id = sa.student_id
+                            JOIN branch as b
+                            ON s.branch_id = b.branch_id
+                            WHERE s.branch_id = $this->branch_id AND s.tpo_id = $this->tpo_id";
+                # code...
+                break;
+        }
+        
         if($stmt = $this->conn->query($query)){
             return $stmt;
         }
