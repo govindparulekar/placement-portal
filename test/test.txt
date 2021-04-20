@@ -1,1 +1,8 @@
-fajfljfljlsjf
+1. get the file name
+2. check the ext
+3. if ext is valid continue else goto 6
+4. move file 
+5. load file and read data 
+6. store into db
+7. give error
+8. end

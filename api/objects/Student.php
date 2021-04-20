@@ -49,6 +49,15 @@ class Student{
                             ON s.branch_id = b.branch_id
                             WHERE s.roll_no = $this->roll_no AND s.branch_id = $this->branch_id AND s.tpo_id = $this->tpo_id";
             break;
+            case 'email':
+                echo $this->email;
+                $query = "SELECT * FROM $this->table_name s
+                            JOIN student_acadamic_info as sa
+                            ON s.student_id = sa.student_id
+                            JOIN branch as b
+                            ON s.branch_id = b.branch_id
+                            WHERE s.email = '$this->email'";
+            break;
             
             default:
                 $query = "SELECT * FROM $this->table_name s
