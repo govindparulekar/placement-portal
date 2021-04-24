@@ -1,5 +1,5 @@
 <?php
-include_once '../api/utility.php';
+include_once '../includes/utility.inc.php';
 class PlacedStudent{
     private $conn;
     private $table_name = 'placed_student';

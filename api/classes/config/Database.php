@@ -1,4 +1,5 @@
 <?php
+namespace config;
 
 class Database{
   
@@ -15,9 +16,9 @@ class Database{
         $this->conn = null;
   
         try{
-            $this->conn = new PDO("mysql:host=" . $this->host . ";dbname=" . $this->db_name, $this->username, $this->password);
+            $this->conn = new \PDO("mysql:host=" . $this->host . ";dbname=" . $this->db_name, $this->username, $this->password);
             $this->conn->exec("set names utf8");
-        }catch(PDOException $exception){
+        }catch(\PDOException $exception){
             echo "Connection error: " . $exception->getMessage();
         }
   

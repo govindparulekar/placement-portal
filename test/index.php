@@ -7,7 +7,7 @@
     <title>Document</title>
 </head>
 <body>
-    <form action="test.php?drive_id=35559958" method="post" enctype = "multipart/form-data">
+    <form action="../api/student/register.php?tpo_id=123&branch_id=6" method="post" enctype = "multipart/form-data">
         <input type="file" name="sheet" id="">
         <input type="submit" name = "submit" value="Upload">
     </form>

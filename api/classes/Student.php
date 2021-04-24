@@ -34,6 +34,9 @@ class Student{
                             WHERE s.student_id = $this->student_id";
             break;
             case 'name':
+                echo "$this->name\n";
+                echo "$this->branch_id\n";
+                echo "$this->tpo_id\n";
                 $query = "SELECT * FROM $this->table_name s
                             JOIN student_acadamic_info as sa
                             ON s.student_id = sa.student_id
@@ -50,7 +53,7 @@ class Student{
                             WHERE s.roll_no = $this->roll_no AND s.branch_id = $this->branch_id AND s.tpo_id = $this->tpo_id";
             break;
             case 'email':
-                echo $this->email;
+                //echo $this->email;
                 $query = "SELECT * FROM $this->table_name s
                             JOIN student_acadamic_info as sa
                             ON s.student_id = sa.student_id
@@ -79,33 +82,57 @@ class Student{
     }
 
     public function register(){
-        $query = "INSERT INTO $this->table_name SET tpo_id = :tpo_id, name = :name , email = :email, username = :username, password = :password, division = :division, branch_id = :branch_id, roll_no =:roll_no";
+        /*here im first checking if the entry for email already exists and its not empty if it exists and not empty i dont wont to execute query as it will cause error bcz email is unique key . i dont want to cause error but simply ignor tht entry.*/
 
-        $stmt = $this->conn->prepare($query);
-        $this->tpo_id = htmlspecialchars(strip_tags($this->tpo_id));
-        $this->name = htmlspecialchars(strip_tags($this->name));
-        $this->email = htmlspecialchars(strip_tags($this->email));
-        $this->username = htmlspecialchars(strip_tags($this->username));
-        $this->password = htmlspecialchars(strip_tags($this->password));
-        $this->division = htmlspecialchars(strip_tags($this->division));
-        $this->branch_id = htmlspecialchars(strip_tags($this->branch_id));
-        $this->roll_no = htmlspecialchars(strip_tags($this->roll_no));
-        
-        $stmt->bindParam(":tpo_id",$this->tpo_id);
-        $stmt->bindParam(":name",$this->name);
-        $stmt->bindParam(":email",$this->email);
-        $stmt->bindParam(":username",$this->username);
-        $stmt->bindParam(":password",$this->password);
-        $stmt->bindParam(":division",$this->division);
-        $stmt->bindParam(":branch_id",$this->branch_id);
-        $stmt->bindParam(":roll_no",$this->roll_no);
+        //check if student exists with this email in the db
+        $stmt = $this->conn->query("SELECT count(*) FROM $this->table_name WHERE email = '$this->email'");
 
-        if($stmt->execute()){
-            return true;
-        }
-        else{
-            return false;
-        }
+        //if student doesnt exists with this email and email is not empty ,register 
+        if ($stmt->fetchColumn() == 0 && $this->email !== "") {
+            //echo $c;
+            $query = "INSERT INTO $this->table_name SET tpo_id = :tpo_id, name = :name , email = :email, username = :username, password = :password, division = :division, branch_id = :branch_id, roll_no =:roll_no";
+            //echo var_dump($this->conn);
+            $stmt = $this->conn->prepare($query);
+            //echo var_dump($stmt);
+            $this->tpo_id = htmlspecialchars(strip_tags($this->tpo_id));
+            $this->name = htmlspecialchars(strip_tags($this->name));
+            $this->email = htmlspecialchars(strip_tags($this->email));
+            $this->username = htmlspecialchars(strip_tags($this->username));
+            $this->password = htmlspecialchars(strip_tags($this->password));
+            $this->division = htmlspecialchars(strip_tags($this->division));
+            $this->branch_id = htmlspecialchars(strip_tags($this->branch_id));
+            $this->roll_no = htmlspecialchars(strip_tags($this->roll_no));
+            /*
+            echo "\n$this->tpo_id\n";
+            echo "$this->name\n";
+            echo "$this->email\n";
+            echo "$this->username\n";
+            echo "$this->password\n";
+            echo "$this->division\n";
+            echo "$this->branch_id\n";
+            echo "$this->roll_no\n";
+            */
+
+            
+            $stmt->bindParam(":tpo_id",$this->tpo_id);
+            $stmt->bindParam(":name",$this->name);
+            $stmt->bindParam(":email",$this->email);
+            $stmt->bindParam(":username",$this->username);
+            $stmt->bindParam(":password",$this->password);
+            $stmt->bindParam(":division",$this->division);
+            $stmt->bindParam(":branch_id",$this->branch_id);
+            $stmt->bindParam(":roll_no",$this->roll_no);
+
+            if($stmt->execute()){
+                return true;
+            }
+            else{
+                print_r($stmt->errorInfo());
+                return false;
+            }
+               
+        }   
+        return true;
 
     }
 

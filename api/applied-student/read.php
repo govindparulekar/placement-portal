@@ -7,10 +7,10 @@ header("Access-Control-Allow-Methods: GET");
 header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
 
   
-include_once '../config/Database.php';
-include_once '../objects/AppliedStudent.php';
-include_once '../utility.php';
+require_once '../includes/autoloader.php';
+include_once '../includes/utility.inc.php';
 
+use config\Database;
 //get database connection
 $db = new Database();
 $conn = $db->getConnection();

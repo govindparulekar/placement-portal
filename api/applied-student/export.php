@@ -6,13 +6,14 @@ header("Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetm
 header("Content-Disposition: attachment ; filename = export.xlsx");
 
 require '../../vendor/autoload.php';
+require_once '../includes/autoloader.php';
 
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+use config\Database;
 
-include_once '../config/Database.php';
-include_once '../objects/AppliedStudent.php';
-include_once '../utility.php';
+
+include_once '../includes/utility.inc.php';
 
 
 $db = new Database();

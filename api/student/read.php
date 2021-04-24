@@ -7,9 +7,10 @@ header("Access-Control-Allow-Methods: POST");
 header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
 
   
-include_once '../config/Database.php';
-include_once '../objects/Student.php';
-include_once '../utility.php';
+require_once '../includes/autoloader.php';
+include_once '../includes/utility.inc.php';
+
+use config\Database;
 
 //get database connection
 $db = new Database();
@@ -21,6 +22,8 @@ $name = !empty($_POST['name']) ? sanitize($_POST['name']) : null;
 $roll_no = !empty($_POST['roll_no']) ? sanitize($_POST['roll_no']) : null;
 $branch_id = !empty($_POST['branch_id']) ? sanitize($_POST['branch_id']) : null;
 $tpo_id = !empty($_POST['tpo_id']) ? sanitize($_POST['tpo_id']) : null;
+$email = !empty($_POST['email']) ? sanitize($_POST['email']) : null;
+
 
 
 if (!empty($student_id)) {
@@ -40,6 +43,10 @@ else if(!empty($roll_no)&&!empty($branch_id)&&!empty($tpo_id)){
 else if(!empty($branch_id)&&!empty($tpo_id)){
     fetch('branch');
     
+}
+else if(!empty($email)){
+    $student->email = $email;
+    fetch('email');
 }
 else{
     echo json_encode(array("status"=>"failed","msg"=>"Insufficient data"));
@@ -85,8 +92,9 @@ function fetch($filter){
                 "division"                  => $division
             );
             array_push($data['records'],$student_data);
-            echo "hello";
+            //echo "hello";
             }         
+            $data['count'] = $stmt->rowCount();
             echo json_encode($data);
         }
         else{

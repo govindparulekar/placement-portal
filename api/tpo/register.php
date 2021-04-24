@@ -6,8 +6,10 @@ header("Access-Control-Allow-Methods: POST");
 header("Access-Control-Max-Age: 86400");
 header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
 
-include_once '../config/Database.php';
-include_once '../objects/TPO.php';
+require_once '../includes/autoloader.php';
+include_once '../includes/utility.inc.php';
+
+use config\Database;
 
 //get database connection
 $db = new Database();

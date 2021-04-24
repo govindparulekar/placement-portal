@@ -1,0 +1,12 @@
+.card-body{
+    text-align: left;
+}
+
+.card{
+    margin: 5px;
+    padding: 10px;
+    box-shadow: 0 3px 11px rgb(0 0 0 / 17%);
+}
+.card-info{
+    padding: 5px 0;
+}
