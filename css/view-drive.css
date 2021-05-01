@@ -1,0 +1,68 @@
+#main-row,#left-panal,#right-panal,.container{
+    height: inherit;
+}
+section.main{
+    padding:0;
+    min-height: 100vh;
+}
+#main-row{
+    min-height: 100vh;
+
+}
+#right-panal{
+    background-color: white;
+    box-shadow: 0 12px 30px rgb(80 143 244 / 10%);
+    padding: 0;
+    position: sticky;
+    top: 60px;
+    right: 0;
+    
+    
+}
+#right-panal ul{
+    width: 100% !important;
+}
+#right-panal li{
+    padding: 20px;
+}
+#right-panal li:hover{
+    cursor: pointer;
+}
+#left-panal{
+    padding-top: 20px;
+}
+
+.d-name{
+    font-size: 1.1em;
+    color: #4a887b;
+}
+.d-val{
+    color: #494950;
+}
+.drive_detail_rows{
+    padding: 5px 0;
+}
+.drive_detail_rows .criteria{
+    margin-bottom: 5px;
+}
+select{
+    margin-bottom: 20px;
+}
+.op-icon,.check-box{
+    margin: 0 5px;
+    cursor: pointer;
+}
+#table-cont{
+    height: 65%;
+    overflow-y: auto;
+}
+#added-placed-students{
+    padding: 10px 0;
+}
+#submit-ps-btn{
+    width: 75px;
+    text-align: center;
+}
+#enter-data{
+    margin-top: 100px;
+}

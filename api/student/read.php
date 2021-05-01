@@ -68,13 +68,14 @@ function fetch($filter){
                 $student_data = array(
                 "student_id"                => $student_id,
                 "name"                      => $name,
+                "roll_no"                   => $roll_no,
+                "branch"                    => $branch_name,
+                "division"                  => $division,
                 "email"                     => $email,
                 "contact"                   => $contact,
-                "branch"                    => $branch_name,
-                "gender"                    => $gender,
                 "dob"                       => $dob,
+                "gender"                    => $gender,
                 "institute"                 => $institute,
-                "roll_no"                   => $roll_no,
                 "passout_year"              => $passout_year,
                 "ssc_per"                   => $ssc_per,
                 "hsc_dip_per"               => $hsc_dip_per,
@@ -88,8 +89,7 @@ function fetch($filter){
                 "sem7"                      => $sem7,
                 "sem8"                      => $sem8,
                 "active_kt"                 => $active_kt,
-                "dead_kt"                   => $dead_kt,
-                "division"                  => $division
+                "dead_kt"                   => $dead_kt
             );
             array_push($data['records'],$student_data);
             //echo "hello";

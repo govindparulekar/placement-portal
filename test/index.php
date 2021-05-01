@@ -11,5 +11,9 @@
         <input type="file" name="sheet" id="">
         <input type="submit" name = "submit" value="Upload">
     </form>
+    <div class="btn-cont d-flex justify-content-between">
+        <button id = "export" class="btn btn-primary">Export</button>
+        <button id= "reject" class="btn btn-danger">Reject</button>
+    </div>
 </body>
 </html>

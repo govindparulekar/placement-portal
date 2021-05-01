@@ -42,6 +42,8 @@ if(!empty($tpo_id)&&!empty($branch_id)){
                 "current_course_agg"=> $current_course_agg,
                 "strict_checking"   => $strict_checking,
                 "created_at"        => $created_at,
+                "job_location"        => $job_location
+
             );
             array_push($data['records'],$drive_data);
             }
@@ -50,7 +52,8 @@ if(!empty($tpo_id)&&!empty($branch_id)){
             
         }
         else{
-            echo json_encode(array("status"=>"failed","msg"=>"NO record found"));
+            http_response_code(404);
+            
         }
     }
     else{

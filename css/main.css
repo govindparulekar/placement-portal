@@ -17,6 +17,8 @@ img{
 th{
     position: sticky;
     top: 0;
+    background-color: white !important;
+    color:#2c5450 ;
 }
 .side-nav a{
     color: #2c5450;
@@ -84,6 +86,7 @@ th{
 }
 #select-file{
     margin-right: 100px;
+    box-shadow: 0 3px 11px rgb(0 0 0 / 17%);
 }
 #select-branch{
     margin-right: 100px;
@@ -107,7 +110,7 @@ section.main{
     padding: 30px 10px;
     background-color: whitesmoke;
     height: 100vh;
-    text-align: center;
+    
 }
 section.main #align-wrapper-mailbtn{
     text-align: right;
@@ -117,4 +120,9 @@ section.main #align-wrapper-mailbtn{
     height: 70% !important;
     overflow-y: scroll;
     margin-bottom: 20px;
+}
+.default-msg-wrapper{
+    padding-top: 30px;
+    font-size: 1.5em;
+    color: #a5afae;
 }

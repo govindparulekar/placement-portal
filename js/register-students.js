@@ -1,5 +1,5 @@
 $(function(){
-    var tpo_id = 3131;
+    var tpo_id = 5324;
     var $upload_btn = $('#upload-btn .btn');  
 
     //upload event

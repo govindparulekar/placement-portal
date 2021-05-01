@@ -37,7 +37,7 @@
     <section class="main">
         <div class="container" id="reg-students-table-cont">
             <table class="table" style = "background-color: white">
-                <thead class = "table-dark">
+                <thead>
                     <tr>
                     <th scope="col">#</th>
                     <th scope="col">Name</th>

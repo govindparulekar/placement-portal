@@ -24,6 +24,7 @@ if(!empty($student_id_array)){
 
     }
     else{
+        http_response_code(500);
         echo json_encode(array("status"=>"failed","msg"=>"Unable to read at this moment.."));
     }
 }

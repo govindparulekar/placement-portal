@@ -12,6 +12,7 @@ class Drive{
     public $designation;
     public $drive_start_date;
     public $app_end_date;
+    public $job_location;
 
     // construct or with $db as database connection
     public function __construct($conn){
@@ -28,7 +29,8 @@ class Drive{
                     package_range = :package_range,
                     designation = :designation,
                     drive_start_date = :dst,
-                    app_end_date = :aed";
+                    app_end_date = :aed,
+                    job_location = :job_location";
 
         $stmt = $this->conn->prepare($query);
 
@@ -42,6 +44,7 @@ class Drive{
         $stmt->bindParam(':designation',$this->designation);
         $stmt->bindParam(':dst',$this->drive_start_date);
         $stmt->bindParam(':aed',$this->app_end_date);
+        $stmt->bindParam(':job_location',$this->job_location);
 
         if($stmt->execute()){
             return true;
@@ -53,7 +56,7 @@ class Drive{
     }
 
     function readByBranch($branch_id){
-        $query = "SELECT d.drive_id,company_name,description,package_fixed,package_range,designation, app_end_date, drive_start_date, created_at, c.ssc_per, c.hsc_dip_per, c.max_live_kt, c.current_course_agg, c.strict_checking
+        $query = "SELECT d.drive_id,company_name,description,package_fixed,package_range,designation, app_end_date, drive_start_date, created_at, c.ssc_per, c.hsc_dip_per, c.max_live_kt, c.current_course_agg, c.strict_checking, job_location
         FROM drives AS d
         JOIN drive_branch_xref AS db
         ON d.drive_id = db.drive_id
@@ -75,7 +78,7 @@ class Drive{
     }
 
     function readById(){
-        $query = "SELECT d.drive_id,company_name,description,package_fixed,package_range,designation, app_end_date, drive_start_date, created_at, c.ssc_per, c.hsc_dip_per, c.max_live_kt, c.current_course_agg, c.strict_checking
+        $query = "SELECT d.drive_id,company_name,description,package_fixed,package_range,designation, app_end_date, drive_start_date, created_at, c.ssc_per, c.hsc_dip_per, c.max_live_kt, c.current_course_agg, c.strict_checking,job_location
         FROM drives AS d
         LEFT JOIN criteria AS c
         ON d.drive_id = c.drive_id

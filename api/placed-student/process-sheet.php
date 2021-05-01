@@ -2,7 +2,7 @@
 // required headers
 header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json; charset=UTF-8");
-header("Access-Control-Allow-Methods: GET");
+header("Access-Control-Allow-Methods: POST");
 header("Access-Control-Max-Age: 86400");
 header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
 
@@ -14,7 +14,7 @@ use config\Database;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 
 //get posted data
-$drive_id = !empty($_GET['drive_id']) ? $_GET['drive_id'] : null;
+$drive_id = !empty($_POST['drive_id']) ? $_POST['drive_id'] : null;
 
 //Get database connection
 $db = new Database();
@@ -26,19 +26,19 @@ $error = "";
 
 
 
-if ($_POST['submit']) {
+
 
     //echo 'submitted';
     $upload_dir = '../uploads/sheets/';
-    $file_temp_name = $_FILES['sheet']['tmp_name'];
-    $file_name = $_FILES['sheet']['name'];
+    $file_temp_name = $_FILES['file']['tmp_name'];
+    $file_name = $_FILES['file']['name'];
     $file_ext = strtolower(pathinfo($file_name,PATHINFO_EXTENSION));
-    $valid_ext = ['xls','xlsx','png'];
+    $valid_ext = ['xls','xlsx'];
     
     if (in_array($file_ext,$valid_ext)) {
         move_uploaded_file($file_temp_name,$upload_dir.$file_name);
         if(processSheet($student,$upload_dir,$file_name,$drive_id,$placed_student)){
-            echo json_encode(array("status"=>"success","msg"=>"Updated"));      
+            echo json_encode(array("status"=>"success","msg"=>"Success"));      
         }
         else{
             echo json_encode(array("status"=>"failed","msg"=>$error));
@@ -47,7 +47,7 @@ if ($_POST['submit']) {
         
     }
     
-}
+
 
 function processSheet($student,$upload_dir,$file_name,$drive_id,$placed_student){
     global $error;

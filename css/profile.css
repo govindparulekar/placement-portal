@@ -1,0 +1,61 @@
+#top{
+    height: 200px;
+}
+.main{
+    position: relative;
+}
+#profile-cont{
+    padding: 0 100px;
+    position: absolute;
+    top: -300px;
+    z-index: 1;
+}
+
+.avatar{
+    width: 150px;
+    height: 150px;
+    display: inline-block;
+    border-radius: 50%;
+    
+}
+.avatar-wrapper{
+    position: relative;
+    top: 130px;
+    z-index: 2;
+    text-align: center;
+}
+.avatar img{
+    border-radius: 50%;
+  
+}
+.name{
+    padding: 10px;
+    font-size: 1.2em;
+    font-weight:normal;
+}
+.card{
+    padding: 100px 0;
+    box-shadow: 0 12px 30px rgb(80 143 244 / 10%);
+}
+.card-body{
+    padding: 50px 30px 0 30px;
+}
+.card-body .container{
+    padding-left: 100px;
+    padding-bottom: 20px;
+    
+}
+label{
+    font-size: 1.4em;
+    margin-bottom: 15px;
+    border-bottom: 2px solid #64c5b1;
+    color: #2d4b45;
+}
+.info-row{
+    font-size: 1.2em;
+    padding: 3px 0;
+   
+}
+.col-md-3{
+    font-weight: bold;
+}

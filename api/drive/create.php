@@ -31,10 +31,12 @@ $hsc_dip_per = !empty($_POST['hsc_dip_per']) ? sanitize($_POST['hsc_dip_per']) :
 $max_live_kt = !empty($_POST['max_live_kt']) ? sanitize($_POST['max_live_kt']) : null;
 $strict_checking = !empty($_POST['strict_checking']) ? sanitize($_POST['strict_checking']) : null;
 $current_course_agg = !empty($_POST['current_course_agg']) ? sanitize($_POST['current_course_agg']) : null;
+$job_location = !empty($_POST['job_location']) ? sanitize($_POST['job_location']) : null;
+
 $no_criteria = $_POST['no_criteria'];
 //array
 $branch = !empty($_POST['branch']) ? $_POST['branch'] : null;
-echo var_dump($branch);
+//echo var_dump($branch);
 /*---------------------------------------------------------------------------------------------*/
 
 //create random drive id so as to put this into criteria and drive table simultaneously
@@ -53,7 +55,7 @@ else{
 
 /*------------------------------------Functions------------------------------------*/
 function addDriveDetails(){
-    global $conn,$tpo_id,$drive_id,$company_name,$description,$designation,$app_end_date,$package_fixed,$package_range,$drive_start_date;
+    global $conn,$tpo_id,$drive_id,$company_name,$description,$designation,$app_end_date,$package_fixed,$package_range,$drive_start_date,$job_location;
 
     $drive = new Drive($conn);
     
@@ -66,6 +68,7 @@ function addDriveDetails(){
     $drive->designation = $designation;
     $drive->drive_start_date = $drive_start_date;
     $drive->app_end_date = $app_end_date;
+    $drive->job_location = $job_location;
     
     return $drive->create();
 }

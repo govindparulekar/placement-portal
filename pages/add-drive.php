@@ -9,6 +9,7 @@
 </head>
 <body>
     <?php include '../common/sidebar.php'?>
+    <?php include '../pages/modal.php'?>
     <section id = "top">
         <div class="container d-flex flex-wrap justify-content-between">
             
@@ -24,7 +25,7 @@
             </div>
             
             <div class= "top-btn" id="add-drive-btn">
-                <button type="button"  class="btn">Add Drive</button>
+                <button type="button"  class="btn" data-bs-toggle = "modal" data-bs-target="#add-drive-modal">Add Drive</button>
             </div>
         </div>    
     </section>
@@ -32,43 +33,9 @@
     <section class="main">
     <div class="container" id="drives-cont">    
         <div class="row">
-            <div class="col-lg-6">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="row card-info" id="company-name">
-                            <div class="col-sm-5">Company</div>
-                            <div class="col-sm-1">:</div>
-                            <div class="col-sm-6">Google Private Limited</div>
-                        </div>
-                        <div class="row card-info" id="position">
-                            <div class="col-sm-5">Position</div>
-                            <div class="col-sm-1">:</div>
-                            <div class="col-sm-6">Software Developer</div>
-                        </div>
-                        <div class="row card-info">
-                            <div class="col-sm-5">Drive Starts</div>
-                            <div class="col-sm-1">:</div>
-                            <div class="col-sm-6">2 April 2021</div>
-                        </div>
-                        <div class="row card-info">
-                            <div class="col-sm-5">Application Ends</div>
-                            <div class="col-sm-1">:</div>
-                            <div class="col-sm-6">1 April 2021</div>
-                        </div>
-                        <div class="card-btn-cont mt-3 d-flex flex-wrap justify-content-between">
-                            <button class="btn btn-outline-primary">Applied Students:</button>
-                            <button class="btn btn-outline-primary">View</button>
-                            <button class="btn btn-outline-danger">End</button>
-                        </div>
-                        
-                    </div>
-                </div>
+            <div class="default-msg-wrapper d-flex justify-content-center">
+                <div class="msg">Select branch to view Active Drives</div>
             </div>
-
-            
-            
-
-            
             
         </div>
         

@@ -18,7 +18,7 @@
         </div>
         <div class="nav-item">
             <div class="icon"><img  src="../images/icons/add-drive.png" alt=""></div>
-            <a href="../pages/add-drive.php" class="nav-link">Add drive</a>
+            <a href="../pages/add-drive.php" class="nav-link">Drives</a>
         </div>
         <div class="nav-item">
             <div class="icon"><img  src="../images/icons/search-students.png" alt=""></div>

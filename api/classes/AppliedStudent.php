@@ -9,7 +9,7 @@ class AppliedStudent{
     
     public function read($drive_id,$branch_id,$q){
         if($q == "all"){
-            $query = "SELECT aps.student_id, s.name, s.gender, s.dob, s.email, s.contact, s.institution_name, b.branch_name, s.passout_year, sa.ssc_per, sa.hsc_dip_per, sa.current_course_agg, sa.active_kt,sa.dead_kt
+            $query = "SELECT aps.student_id,s.roll_no, s.name, s.gender, s.dob, s.email, s.contact, s.institute, b.branch_name, s.passout_year, sa.ssc_per, sa.hsc_dip_per, sa.current_course_agg, sa.active_kt,sa.dead_kt
             FROM applied_student AS aps
             JOIN student_basic_info AS s
             ON aps.student_id = s.student_id

@@ -29,6 +29,7 @@ if(!empty($drive_id)&&!empty($branch_id)&&!empty($q)){
             echo json_encode($data);      
         }
         else{
+            http_response_code(404);
             echo json_encode(array("status"=>"failed","msg"=>"NO record found"));
         }
     }
@@ -51,7 +52,7 @@ function prepareJSON($stmt,$q){
                     $applied_student_data = array(
                         "student_id"        => $student_id,
                         "student_name"    => $name,
-                        "roll_no"     => $roll_no,
+                        "roll_no"     => $roll_no
                     );
                 }
                 else{
