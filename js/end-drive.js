@@ -49,31 +49,60 @@ $(function(){
 
     });
     let added = [];
+    let placed_students = [];
     $('#add-btn').on('click',function(){
-        email = $('#email').val();
-        pkg = $('#pkg').val();
+        let email = $('#email').val();
+        let pkg = $('#pkg').val();
         if (email&&pkg) {
             if (!added.includes(email)) {
             $cont = $('#added-placed-students');
-            $row = $(`<div class="row">
-                        <div class="col-md-4">${email}</div>
-                        <div class="col-md-2">${pkg} LPA</div>
-                        <div id="remove" class="col-md-2"><i class="fas fa-times"></i></div>
-                    </div>`);
+            $row = $(`<div class="row placed-student-row"><div class="col-md-4">${email}</div><div class="col-md-2">${pkg} LPA</div><div id="remove" class="col-md-2"><i class="fas fa-times"></i></div></div>`);
 
             $cont.append($row);
             added.push(email);
+            placed_students.push({email:email,package:parseInt(pkg)});
+            console.log(placed_students);
             }
         }     
         
     });
     $(document).on('click','#remove',function(){
         alert();
-        $(this).parent().remove();
-        added.splice(added.indexOf($(this).parent().first().text()),1); 
+        $row = $(this).parent();
+      
+        added.splice(added.indexOf($row.first().text()),1); 
+        placed_students.forEach((ps,i)=>{
+            console.log(ps.email , $row[0].firstChild.textContent);
+            if (ps.email == $row[0].firstChild.textContent) {
+                placed_students.splice(i,1);
+                console.log(i);
+            }
+        });
+        $row.remove();
+        console.log(placed_students);
     });
    $(document).on('click','#submit-ps-btn',function(){
-       
+       if (placed_students.length!=0) {
+        placed_students.forEach(ps =>{
+            console.log(ps.email,ps.package);
+            //console.log(ps);
+            $.post('../api/placed-student/create.php',{
+                email: ps.email,
+                package: ps.package,
+                drive_id: 35559958  
+            },data=>{
+                console.log(data);
+            })
+            .fail((data)=>{
+                console.log(data)
+            });
+        });
+        alert('Success');
+       }
+       added = [];
+       placed_students = [];
+       console.log(added,placed_students);
+       $('#added-placed-students').empty();
    });
 
 

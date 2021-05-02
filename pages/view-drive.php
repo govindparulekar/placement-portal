@@ -31,7 +31,6 @@
                 <ul class="list-group">
                     <li id="drive-details" class="list-group-item active">Drive Details</li>
                     <li id="applied-students" class="list-group-item">Applied Students</li>
-                    <li id="add-notice" class="list-group-item">Add Notice</li> 
                     <li id="end-drive" class="list-group-item">End Drive</li> 
                 </ul>
             </div>

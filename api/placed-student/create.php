@@ -26,10 +26,11 @@ $student = new Student($conn);
 $placed_student = new PlacedStudent($conn);
 
 $placed_student->drive_id = $drive_id;
-$placed_student->email = $email;
+$student->email = $email;
 $placed_student->package = $package;
 
 if ($stmt = $student->read('email')) {
+   // echo $stmt->rowCount();
     if ($stmt->rowCount()>0) {
         $student_id = $stmt->fetchColumn(0);
         $placed_student->student_id = $student_id;
@@ -39,6 +40,9 @@ if ($stmt = $student->read('email')) {
         else{
             http_response_code(500);
         }
+    }
+    else{
+        echo 'fail';
     }
 }
 else{
