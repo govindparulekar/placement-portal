@@ -1,2 +1,2 @@
 <?php
-echo 'helo';
+echo $_SERVER['DOCUMENT_ROOT'];
