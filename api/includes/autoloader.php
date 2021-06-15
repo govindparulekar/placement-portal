@@ -4,6 +4,9 @@ ini_set('display_errors','1');
 spl_autoload_register('loader');
 
 function loader($class_name){
+    if($class_name == 'config\Database'){
+        $class_name = 'config/Database';
+    }
     $dir = $_SERVER['DOCUMENT_ROOT']."/placement-portal/api/classes/";
     $ext = ".php";
     $class_file_path = $dir.$class_name.$ext;
