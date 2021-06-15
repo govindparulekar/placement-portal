@@ -6,9 +6,9 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
   exit;
 }
 require_once '../api/includes/autoloader.php';
-use config\Database;
+use config as c;
 
-$db = new Database();
+$db = new c\Database();
 $conn = $db->getConnection();
 
 $tpo = new TPO($conn);
