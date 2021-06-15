@@ -9,11 +9,11 @@ function loader($class_name){
     $class_file_path = $dir.$class_name.$ext;
 
     //echo "\n".$class_file_path."\n";
-    if (file_exists($class_file_path)) {
+    if ($e = file_exists($class_file_path)) {
         include_once $class_file_path;
     }
     else{
-        echo $class_file_path;
+        echo $e;
     }
 
 }
