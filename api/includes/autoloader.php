@@ -9,7 +9,7 @@ function loader($class_name){
     $class_file_path = $dir.$class_name.$ext;
 
     //echo "\n".$class_file_path."\n";
-    if ($e = file_exists($class_file_path)) {
+    if ($e = file_exists($_SERVER['DOCUMENT_ROOT']."/placement-portal/api/classes/config/Database.php")) {
         include_once $class_file_path;
     }
     else{
