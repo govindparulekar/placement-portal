@@ -1,17 +1,24 @@
 <?php
-    $title = "Add drive";
+    require_once '../login/session.php';
+    $title = "Search Students";
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <?php include '../common/head.php'?>
-    <link rel="stylesheet" href="../css/add-drive.css">
+    <link rel="stylesheet" href="../css/search-students.css">
 </head>
 <body>
     <?php include '../common/sidebar.php'?>
-    <?php include '../pages/modal.php'?>
+    <?php include '../tpo/modal.php'?>
     <section id = "top">
-        <div class="container d-flex flex-wrap justify-content-between">
+        <div class="container d-flex justify-content-between">
+            <div id="name" class="me-3">
+                <input type="text" class="form-control" placeholder = "Name">
+            </div>
+            <div id="roll" class="me-3">
+                <input type="text" class="form-control" placeholder = "Roll no.">
+            </div>
             
             <div id="select-branch">
                 <select class="form-select" aria-label="Default select example">
@@ -24,20 +31,20 @@
                 </select>
             </div>
             
-            <div class= "top-btn" id="add-drive-btn">
-                <button type="button"  class="btn" data-bs-toggle = "modal" data-bs-target="#add-drive-modal">Add Drive</button>
+            <div class= "top-btn" id="search">
+                <button type="button"  class="btn" >Search</button>
             </div>
         </div>    
     </section>
     
     <section class="main">
-    <div class="container" id="drives-cont">    
-        <div class="row">
+    <div class="container">    
+        
             <div class="default-msg-wrapper d-flex justify-content-center">
-                <div class="msg">Select branch to view Active Drives</div>
+                <div class="msg">Search by name and branch or roll and branch or just branch</div>
             </div>
             
-        </div>
+
         
     </div>
     
@@ -47,6 +54,6 @@
         
         
         <?php include '../common/scripts.php'?>
-        <script src="../js/add-drive.js"></script>
+        <script src="../js/search-students.js"></script>
     </body>
 </html>

@@ -144,6 +144,8 @@ $(function(){
                     $target = $(e.target);
                     switch (e.target.id) {
                         case 'export':
+                            alert('exporting');
+                            window.location = `../api/applied-student/export.php?drive_id=${drive_id}&branch_id=${branch_id}&q=all`;
                             
                             break;
                         case 'reject':

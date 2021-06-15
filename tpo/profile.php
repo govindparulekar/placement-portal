@@ -1,4 +1,5 @@
 <?php
+    require_once '../login/session.php';
     $title = "Add drive";
 ?>
 <!DOCTYPE html>
@@ -19,7 +20,7 @@
     <div class="container" id="profile-cont">    
         <div class="avatar-wrapper">
             <div class="avatar">
-                <img class="img" src="../images/dp/me.jpg" alt="">
+                <img class="img" src="" alt="">
             </div>
             <div class="name">Govind Vishwas Parulekar</div>
         </div>

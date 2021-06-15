@@ -1,7 +1,8 @@
 $(function(){
-    var tpo_id = 5324;
+   
     var $upload_btn = $('#upload-btn .btn');  
-
+    
+    console.log(dp,tpo_id);
     //upload event
     $upload_btn.on('click',(e)=>{
         
@@ -21,13 +22,14 @@ $(function(){
             }
             else{
                 $upload_btn.prop('disabled',true);//disable the button
+                $upload_btn.text('Uploading..');
                 //grab file and branch id , send request
                 var fd = new FormData();
                 var file = $file_inp[0].files[0]; //get the file from file input field
                 var branch_id = $select_inp.val();//get the branch id from select input
                 fd.append('file',file);           //append to formdata object   
                 fd.append('branch_id',branch_id);
-                fd.append('tpo_id',3131);
+                fd.append('tpo_id',tpo_id);
                 $.ajax({
                     url: '../api/student/register.php',
                     type: 'post',
@@ -36,6 +38,7 @@ $(function(){
                     processData: false,
                     success: function(data){
                         $upload_btn.prop('disabled',false);
+                        $upload_btn.text('Upload');
                         $file_inp.val("");
                         $select_inp.val(0);
                         alert(data.msg);

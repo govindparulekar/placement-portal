@@ -3,6 +3,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title><?php echo $title?></title>
 
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
 <!--Font awsome-->
 <script src="https://kit.fontawesome.com/d696af1192.js" crossorigin="anonymous"></script>
 <!--Bootstrap css CDN-->

@@ -1,5 +1,7 @@
 <?php
+    require_once '../login/session.php';
     $title = "Register Students";
+    //echo $_SESSION['id'];
 ?>
 <!DOCTYPE html>
 <html lang="en">

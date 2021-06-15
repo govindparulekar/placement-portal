@@ -20,7 +20,7 @@ $drive_id = !empty($_GET['drive_id']) ? sanitize($_GET['drive_id']) : null;
 $branch_id = !empty($_GET['branch_id']) ? sanitize($_GET['branch_id']) : null;
 $q = !empty($_GET['q']) ? sanitize($_GET['q']) : null;
 
-
+    
 if(!empty($drive_id)&&!empty($branch_id)&&!empty($q)){
     
     if($stmt = $applied_student->read($drive_id,$branch_id,$q)){

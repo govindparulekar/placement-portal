@@ -1,14 +1,17 @@
 $(function(){
     var student_id = $('#student-id').val();
+    var dp = $('#student-dp').val();
     $.post('../api/student/read.php',{
         student_id: student_id
     },data => {
         console.log(data);
         renderData(data);
     });
-
+    
     function renderData(data){
         $student = data.records[0];
+        $('.avatar img').attr('src',$student.dp);
+
         $general_info_cont = $('#general-info');
         $acadamic_info_cont = $('#acadamic-info');
         $general_info = $(`<div class="row info-row">

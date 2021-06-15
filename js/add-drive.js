@@ -16,9 +16,10 @@ $(function(){
         
     });
     function driveReadReq(branch_id){
+        console.log(branch_id,tpo_id);
         if (branch_id != 0) {
             $.post('../api/drive/read-by-branch.php',{
-                tpo_id: 5324,
+                tpo_id: tpo_id,
                 branch_id: branch_id
             },data =>{
                 
@@ -77,6 +78,7 @@ $(function(){
           let app_ends = $('#app-ends').val();
           let no_criteria =  0;
           let strict_check = 0;
+          let sheet_link = $('#sheet-link').val() == "" ? null : $('#sheet-link').val();
           $('.form-check-input:checked').each(function(){
               if (this.id == 'no-criteria') {
                   no_criteria = 1;
@@ -110,10 +112,10 @@ $(function(){
             console.log(drive_starts);
             console.log(app_ends);
             if (no_criteria) {
-                driveCreateReq(company_name,description,designation,job_location,fixed_inp,range_inp,branch,drive_starts,app_ends,no_criteria,strict_check);
+                driveCreateReq(company_name,description,designation,job_location,fixed_inp,range_inp,branch,drive_starts,app_ends,no_criteria,strict_check,sheet_link);
             }
             else if (ssc_per||hsc_dip_per||cca||mlk) {
-                driveCreateReq(company_name,description,designation,job_location,fixed_inp,range_inp,branch,drive_starts,app_ends,no_criteria,strict_check,ssc_per,hsc_dip_per,cca,mlk);
+                driveCreateReq(company_name,description,designation,job_location,fixed_inp,range_inp,branch,drive_starts,app_ends,no_criteria,strict_check,sheet_link,ssc_per,hsc_dip_per,cca,mlk,sheet_link);
             }
             else{
                 alert('Check no criteria');
@@ -132,10 +134,10 @@ $(function(){
         
     });
 
-    function driveCreateReq(company_name,description,designation,job_location,fixed_inp,range_inp,branch,drive_starts,app_ends,no_criteria,strict_check,ssc_per = null,hsc_dip_per=null,cca=null,mlk=null){
+    function driveCreateReq(company_name,description,designation,job_location,fixed_inp,range_inp,branch,drive_starts,app_ends,no_criteria,strict_check,sheet_link,ssc_per = null,hsc_dip_per=null,cca=null,mlk=null){
         console.log(company_name,designation,description,ssc_per,hsc_dip_per,cca,mlk,strict_check,fixed_inp,range_inp,  no_criteria,drive_starts,app_ends,job_location,branch);
         $.post('../api/drive/create.php',{
-            tpo_id: 5324,
+            tpo_id: tpo_id,
             company_name: company_name,
             designation: designation,
             description: description,
@@ -150,7 +152,8 @@ $(function(){
             max_live_kt: mlk,
             strict_checking: strict_check,
             no_criteria:no_criteria,
-            branch: branch
+            branch: branch,
+            sheet_link: sheet_link
         },data=>{
             console.log(data);
             $("#add-drive-modal .form-control").val("");
@@ -212,7 +215,7 @@ $(function(){
                         <div class="card-btn-cont mt-3 d-flex flex-wrap justify-content-around">
                             <button data-branch-id = ${branch_id} data-drive-id = ${drive.drive_id} class="btn btn-outline-primary view-btn">View</button>
 
-                            <button data-branch-id = ${branch_id} data-drive-id = ${drive.drive_id} class="btn btn-outline-danger">End</button>
+    
                         </div> 
                     </div>
                 </div>

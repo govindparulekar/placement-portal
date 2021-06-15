@@ -16,6 +16,12 @@ class Student{
     public $division;
     public $branch_id;
     public $roll_no;
+    public $dp;
+    public $passout_year;
+    public $institute;
+    public $gender;
+    public $dob;
+    public $contact;
     
 
     // constructor with $db as database connection
@@ -23,8 +29,43 @@ class Student{
         $this->conn = $conn;
     }
 
+    public function saveGeneralInfo(){
+        //echo $this->email;
+       // echo $this->contact;
+       // echo $this->gender;
+       // echo $this->dob;
+       // echo $this->passout_year;
+       // echo $this->institute;
+       // echo $this->student_id;
+        $query = "UPDATE $this->table_name SET email = '$this->email', contact = $this->contact, gender = '$this->gender', dob = '$this->dob', passout_year = $this->passout_year, institute = '$this->institute' WHERE student_id = $this->student_id";
+
+        if ($this->conn->query($query)) {
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+    public function saveAcadInfo($ssc_per,$hsc_dip_per,$sem1,$sem2,$sem3,$sem4,$sem5,$sem6,$sem7,$sem8,$cca,$active_kt){
+       // echo "hello";
+        $query = "UPDATE student_acadamic_info SET ssc_per = $ssc_per, hsc_dip_per = $hsc_dip_per, sem1 = $sem1,sem2 = $sem2,sem3 = $sem3,sem4 = $sem4,sem5 = $sem5,sem6 = $sem6,sem7 = $sem7,sem8 = $sem8, current_course_agg = $cca, active_kt = $active_kt WHERE student_id = $this->student_id";
+
+        if ($this->conn->query($query)) {
+            return true;
+        }
+        else{
+            return $this->conn->errorInfo();
+        }
+    }
+
+
+
     public function read($filter){
         switch ($filter) {
+            case 'uname':
+                $query = "SELECT name,username,password,dp,student_id,tpo_id,branch_id,new_login FROM $this->table_name WHERE username = '$this->username'";
+
+                break;
             case 'id':
                 $query = "SELECT * FROM $this->table_name s
                             JOIN student_acadamic_info as sa
@@ -34,9 +75,7 @@ class Student{
                             WHERE s.student_id = $this->student_id";
             break;
             case 'name':
-                echo "$this->name\n";
-                echo "$this->branch_id\n";
-                echo "$this->tpo_id\n";
+                
                 $query = "SELECT * FROM $this->table_name s
                             JOIN student_acadamic_info as sa
                             ON s.student_id = sa.student_id
@@ -90,10 +129,13 @@ class Student{
         //if student doesnt exists with this email and email is not empty ,register 
         if ($stmt->fetchColumn() == 0 && $this->email !== "") {
             //echo $c;
-            $query = "INSERT INTO $this->table_name SET tpo_id = :tpo_id, name = :name , email = :email, username = :username, password = :password, division = :division, branch_id = :branch_id, roll_no =:roll_no";
+            $query1= "INSERT INTO $this->table_name SET student_id = :student_id, tpo_id = :tpo_id, name = :name , email = :email, username = :username, password = :password, division = :division, branch_id = :branch_id, roll_no =:roll_no";
+            $query2 = "INSERT INTO student_acadamic_info SET student_id = $this->student_id";
+
             //echo var_dump($this->conn);
-            $stmt = $this->conn->prepare($query);
+            $stmt = $this->conn->prepare($query1);
             //echo var_dump($stmt);
+            $this->student_id = htmlspecialchars(strip_tags($this->student_id));
             $this->tpo_id = htmlspecialchars(strip_tags($this->tpo_id));
             $this->name = htmlspecialchars(strip_tags($this->name));
             $this->email = htmlspecialchars(strip_tags($this->email));
@@ -113,7 +155,7 @@ class Student{
             echo "$this->roll_no\n";
             */
 
-            
+            $stmt->bindParam(":student_id",$this->student_id);
             $stmt->bindParam(":tpo_id",$this->tpo_id);
             $stmt->bindParam(":name",$this->name);
             $stmt->bindParam(":email",$this->email);
@@ -124,6 +166,7 @@ class Student{
             $stmt->bindParam(":roll_no",$this->roll_no);
 
             if($stmt->execute()){
+                $this->conn->query($query2);
                 return true;
             }
             else{

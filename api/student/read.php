@@ -89,7 +89,9 @@ function fetch($filter){
                 "sem7"                      => $sem7,
                 "sem8"                      => $sem8,
                 "active_kt"                 => $active_kt,
-                "dead_kt"                   => $dead_kt
+                "dead_kt"                   => $dead_kt,
+                "dp"                        => $dp,
+                "new_login"                 => $new_login
             );
             array_push($data['records'],$student_data);
             //echo "hello";
@@ -98,12 +100,13 @@ function fetch($filter){
             echo json_encode($data);
         }
         else{
+            http_response_code(404);
             echo json_encode(array("status"=>"failed","msg"=>"NO record found"));
 
         }
     }
     else{
-        echo 'fail';
+        http_response_code(500);
     }
 }
     

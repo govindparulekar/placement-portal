@@ -41,11 +41,11 @@
     padding: 50px 30px 0 30px;
 }
 .card-body .container{
-    padding-left: 100px;
+    
     padding-bottom: 20px;
     
 }
-label{
+#general-info>label,#academic-info>label{
     font-size: 1.4em;
     margin-bottom: 15px;
     border-bottom: 2px solid #64c5b1;

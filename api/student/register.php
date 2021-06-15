@@ -36,7 +36,7 @@ $valid_ext = ['xls','xlsx'];
 if (in_array($file_ext,$valid_ext)) {
     move_uploaded_file($file_temp_name,$upload_dir.$file_name);
     //get the array of students data if data is stored in db succsessfully and send to front end as json
-    if($records = processSheet($student,$upload_dir,$file_name,$tpo_id,$branch_id)){
+    if($records = processSheet($student,$upload_dir,$file_name,$tpo_id,$branch_id,$conn)){
         echo json_encode(array("status"=>"success","msg"=>"Registered successfully","records"=>$records));
     }
     else{
@@ -48,7 +48,7 @@ if (in_array($file_ext,$valid_ext)) {
 
 
 
-function processSheet($student,$upload_dir,$file_name,$tpo_id,$branch_id){
+function processSheet($student,$upload_dir,$file_name,$tpo_id,$branch_id,$conn){
     global $error;
     $spreadsheet = \PhpOffice\PhpSpreadsheet\IOFactory::load($upload_dir.$file_name);
     $worksheet = $spreadsheet->getActiveSheet();
@@ -77,6 +77,8 @@ function processSheet($student,$upload_dir,$file_name,$tpo_id,$branch_id){
             array_push($row_data,$cellValue);
             //echo var_dump($row_data);
         }
+        $student_id = mt_rand();
+        $student->student_id = $student_id;
         $student->tpo_id = $tpo_id;
         $student->name = $row_data[0];
         $student->email = $row_data[1];
@@ -96,12 +98,14 @@ function processSheet($student,$upload_dir,$file_name,$tpo_id,$branch_id){
 
         array_push($records,$student_data);
 
-
+        //$query = "INSERT INTO student_acadamic_info SET student_id = $student_id";
+        //$stmt = $conn->prepare($query);
         if(!$student->register()){
             unlink($upload_dir.$file_name);
             $error = "Something went wrong";
             return false;
         }
+       
     }
     unlink($upload_dir.$file_name);
     return $records;

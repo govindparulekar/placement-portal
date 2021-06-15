@@ -1,0 +1,21 @@
+#top{
+    justify-content : center; 
+    padding: 10px 50px;
+    color: whitesmoke;
+    
+    }
+*{
+        font-family: 'Montserrat', sans-serif;
+        
+}
+.greeting{
+    margin-bottom: 0;
+}
+#view-drive-cont{
+    padding: 20px 30px;
+}
+#apply-btn{
+    position: sticky;
+    left: 80%;
+    bottom: 5%;
+}

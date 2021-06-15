@@ -1,4 +1,5 @@
 <?php
+    require_once '../login/session.php';
     $title = "Add drive";
 ?>
 <!DOCTYPE html>
@@ -47,5 +48,6 @@
         <input type="hidden" id="branch_id" value="<?php echo $_GET['branch_id']?>">
         <?php include '../common/scripts.php'?>
         <script src="../js/view-drive.js"></script>
+        <script src="../js/end-drive.js"></script>
     </body>
 </html>

@@ -1,9 +1,11 @@
 <?php
 session_start();
-if (isset($_session['logged_in']&&$_session['logged_id'] === true)) {
-  header('Location:../pages/');
+//echo 'helo';
+if (!isset($_SESSION['logged_in']) && !$_SESSION['logged_in'] === true) {
+  header("location: http://localhost/placement-portal/admin/index.php");
+  exit;
 }
-else{
-  echo "hello";
-}
- ?>
+
+
+
+

@@ -37,7 +37,8 @@ if(!empty($drive_id)){
                 "current_course_agg"=> $current_course_agg,
                 "strict_checking"   => $strict_checking,
                 "created_at"        => $created_at,
-                "job_location"        => $job_location
+                "job_location"        => $job_location,
+                "sheet_link"          => $sheet_link
             );
             array_push($data['records'],$drive_data);
             echo json_encode($data);

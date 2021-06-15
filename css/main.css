@@ -8,6 +8,7 @@ a{
 }
 body{
     margin-left: 250px;
+    
 }
 
 img{
@@ -78,7 +79,7 @@ th{
   }
 
 #top{
-    padding: 30px 100px;
+    padding: 30px 50px;
     background-color: #64c5b1;
     position: sticky;
     top: 0;
@@ -109,7 +110,9 @@ th{
 section.main{
     padding: 30px 10px;
     background-color: whitesmoke;
-    height: 100vh;
+    min-height: 300vh;
+    
+    
     
 }
 section.main #align-wrapper-mailbtn{

@@ -31,7 +31,7 @@ $q = !empty($_GET['q']) ? sanitize($_GET['q']) : null;
 if(!empty($drive_id)&&!empty($branch_id)&&!empty($q)){
     if($stmt = $applied_student->read($drive_id,$branch_id,$q)){
         
-        $title_row = ['Name','Gender','D.O.B','Email ID','Contact','Institution name','Branch','Passout year','SSC %','HSC/DIPLOMA %','Current Course %','Live KT','Dead KT'];
+        $title_row = ['Roll NO','Name','Gender','D.O.B','Email ID','Contact','Institution name','Branch','Passout year','SSC %','HSC/DIPLOMA %','Current Course %','Live KT'];
         $worksheet->fromArray($title_row);
         $row_index = 2;
         while ($row = $stmt->fetch(PDO::FETCH_NUM)) {

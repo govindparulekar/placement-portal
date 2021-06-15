@@ -1,5 +1,5 @@
 <?php
-    $title = "Add drive";
+    $title = "End drive";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -54,6 +54,7 @@
                         </div>
                    </div>
 
+                   <button type="button"  class="btn">End Drive</button>
                     
                 </div>
 

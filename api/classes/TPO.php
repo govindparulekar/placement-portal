@@ -85,6 +85,20 @@ class TPO{
         }
 
     }
+    function readByEmail(){
+        $query = "SELECT * FROM $this->table_name WHERE email = :email";
+        $stmt = $this->conn->prepare($query);//PDOstatement object
+        $this->email = htmlspecialchars(strip_tags($this->email));
+        $stmt->bindParam(":email",$this->email);
+
+        if($stmt->execute()){
+            return $stmt;
+        }
+        else{
+            return false;
+        }
+
+    }
 
     function storeLoginCred(){
         $query = "INSERT INTO tpo_login_cred SET tpo_id = :tpo_id, username = :username, password = :password";
@@ -99,6 +113,19 @@ class TPO{
         else{
             return false;
         }
+    }
+    function isVerified(){
+        $query = "SELECT * from tpo_login_cred as tc JOIN tpo_info as ti on tc.tpo_id = ti.tpo_id where tc.username = :email ";
+        $stmt = $this->conn->prepare($query);
+
+        $stmt->bindParam(":email",$this->email);
+        if($stmt->execute()){
+            return $stmt;
+        }
+        else{
+            return false;
+        }
+
     }
 
     

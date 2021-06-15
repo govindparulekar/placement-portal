@@ -13,6 +13,7 @@ class Drive{
     public $drive_start_date;
     public $app_end_date;
     public $job_location;
+    public $sheet_link;
 
     // construct or with $db as database connection
     public function __construct($conn){
@@ -30,7 +31,8 @@ class Drive{
                     designation = :designation,
                     drive_start_date = :dst,
                     app_end_date = :aed,
-                    job_location = :job_location";
+                    job_location = :job_location,
+                    sheet_link = :sheet_link";
 
         $stmt = $this->conn->prepare($query);
 
@@ -45,6 +47,7 @@ class Drive{
         $stmt->bindParam(':dst',$this->drive_start_date);
         $stmt->bindParam(':aed',$this->app_end_date);
         $stmt->bindParam(':job_location',$this->job_location);
+        $stmt->bindParam(':sheet_link',$this->sheet_link);
 
         if($stmt->execute()){
             return true;
@@ -54,9 +57,37 @@ class Drive{
         }
 
     }
+    function delete(){
+        $query = "DELETE FROM $this->table_name WHERE drive_id = $this->drive_id";
+        if ($stmt = $this->conn->query($query)) {
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
+    function readByAppliedStudents($student_id){
+        $query = "SELECT d.drive_id,company_name,description,package_fixed,package_range,designation, app_end_date, drive_start_date, created_at, c.ssc_per, c.hsc_dip_per, c.max_live_kt, c.current_course_agg, c.strict_checking, job_location, sheet_link
+        FROM drives AS d
+        JOIN applied_student as aps
+        on d.drive_id = aps.drive_id
+        LEFT JOIN criteria as c
+        on d.drive_id = c.drive_id
+        WHERE aps.student_id = $student_id
+        ";
+        if ($stmt = $this->conn->query($query)) {
+            # code...
+            return $stmt;
+        }
+        else{
+            return false;
+        }
+    }
 
     function readByBranch($branch_id){
-        $query = "SELECT d.drive_id,company_name,description,package_fixed,package_range,designation, app_end_date, drive_start_date, created_at, c.ssc_per, c.hsc_dip_per, c.max_live_kt, c.current_course_agg, c.strict_checking, job_location
+       // echo $branch_id , $this->tpo_id;
+        $query = "SELECT d.drive_id,company_name,description,package_fixed,package_range,designation, app_end_date, drive_start_date, created_at, c.ssc_per, c.hsc_dip_per, c.max_live_kt, c.current_course_agg, c.strict_checking, job_location, sheet_link
         FROM drives AS d
         JOIN drive_branch_xref AS db
         ON d.drive_id = db.drive_id
@@ -78,7 +109,7 @@ class Drive{
     }
 
     function readById(){
-        $query = "SELECT d.drive_id,company_name,description,package_fixed,package_range,designation, app_end_date, drive_start_date, created_at, c.ssc_per, c.hsc_dip_per, c.max_live_kt, c.current_course_agg, c.strict_checking,job_location
+        $query = "SELECT d.drive_id,company_name,description,package_fixed,package_range,designation, app_end_date, drive_start_date, created_at, c.ssc_per, c.hsc_dip_per, c.max_live_kt, c.current_course_agg, c.strict_checking,job_location,sheet_link  
         FROM drives AS d
         LEFT JOIN criteria AS c
         ON d.drive_id = c.drive_id

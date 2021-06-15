@@ -32,6 +32,7 @@ $max_live_kt = !empty($_POST['max_live_kt']) ? sanitize($_POST['max_live_kt']) :
 $strict_checking = !empty($_POST['strict_checking']) ? sanitize($_POST['strict_checking']) : null;
 $current_course_agg = !empty($_POST['current_course_agg']) ? sanitize($_POST['current_course_agg']) : null;
 $job_location = !empty($_POST['job_location']) ? sanitize($_POST['job_location']) : null;
+$sheet_link = !empty($_POST['sheet_link']) ? sanitize($_POST['sheet_link']) : null;
 
 $no_criteria = $_POST['no_criteria'];
 //array
@@ -55,7 +56,7 @@ else{
 
 /*------------------------------------Functions------------------------------------*/
 function addDriveDetails(){
-    global $conn,$tpo_id,$drive_id,$company_name,$description,$designation,$app_end_date,$package_fixed,$package_range,$drive_start_date,$job_location;
+    global $conn,$tpo_id,$drive_id,$company_name,$description,$designation,$app_end_date,$package_fixed,$package_range,$drive_start_date,$job_location,$sheet_link;
 
     $drive = new Drive($conn);
     
@@ -69,6 +70,7 @@ function addDriveDetails(){
     $drive->drive_start_date = $drive_start_date;
     $drive->app_end_date = $app_end_date;
     $drive->job_location = $job_location;
+    $drive->sheet_link = $sheet_link;
     
     return $drive->create();
 }
