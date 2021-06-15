@@ -11,7 +11,7 @@ function loader($class_name){
         include_once $class_file_path;
     }
     else{
-        echo "$_SERVER['DOCUMENT_ROOT']";
+        echo $class_file_path;
     }
 
 }
