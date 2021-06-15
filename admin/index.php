@@ -8,7 +8,7 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
 require_once '../api/includes/autoloader.php';
 use config\Database;
 
-$db = new Database();
+$db = new config\Database();
 $conn = $db->getConnection();
 
 $tpo = new TPO($conn);
